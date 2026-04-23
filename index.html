@@ -489,93 +489,9 @@
                 display: none;
             }
         }
-
-        /* Password Protection */
-        #password-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-        }
-
-        #password-box {
-            background: white;
-            padding: 3rem;
-            border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-            text-align: center;
-            max-width: 400px;
-            width: 90%;
-        }
-
-        #password-box h2 {
-            color: var(--accent);
-            margin-bottom: 1.5rem;
-            font-size: 1.75rem;
-        }
-
-        #password-input {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid var(--border);
-            border-radius: 8px;
-            font-size: 1rem;
-            margin-bottom: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        #password-input:focus {
-            outline: none;
-            border-color: var(--accent);
-        }
-
-        #password-submit {
-            width: 100%;
-            padding: 1rem;
-            background: var(--accent);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        #password-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(73, 24, 182, 0.3);
-        }
-
-        #password-error {
-            color: #ef4444;
-            margin-top: 1rem;
-            font-size: 0.875rem;
-            display: none;
-        }
-
-        .content-hidden {
-            display: none;
-        }
     </style>
 </head>
 <body>
-    <div id="password-overlay">
-        <div id="password-box">
-            <h2>Protected Content</h2>
-            <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Enter password to view presentation</p>
-            <input type="password" id="password-input" placeholder="Enter password" autofocus>
-            <button id="password-submit">Access Presentation</button>
-            <p id="password-error">Incorrect password. Please try again.</p>
-        </div>
-    </div>
-    <div id="main-content" class="content-hidden">
     <div class="progress-bar" id="progressBar"></div>
 
     <!-- Slide 1: Cover -->
@@ -980,7 +896,7 @@
     </div>
 
     <!-- Skipr Logo -->
-    <img src="logo/2d886ad8871bb9142de5271beedf0c60af8ddeab.png" alt="Skipr" class="skipr-logo">
+    <img src="../Logo/2d886ad8871bb9142de5271beedf0c60af8ddeab.png" alt="Skipr" class="skipr-logo">
 
     <script>
         // Configuration
@@ -1118,40 +1034,6 @@
         // Initialize
         updateProgress();
         slides[0].classList.add('visible');
-
-        // Password Protection
-        const PASSWORD = 'skipr2026';
-        const passwordInput = document.getElementById('password-input');
-        const passwordSubmit = document.getElementById('password-submit');
-        const passwordError = document.getElementById('password-error');
-        const passwordOverlay = document.getElementById('password-overlay');
-        const mainContent = document.getElementById('main-content');
-
-        function checkPassword() {
-            if (passwordInput.value === PASSWORD) {
-                passwordOverlay.style.display = 'none';
-                mainContent.classList.remove('content-hidden');
-                sessionStorage.setItem('authenticated', 'true');
-            } else {
-                passwordError.style.display = 'block';
-                passwordInput.value = '';
-                passwordInput.focus();
-            }
-        }
-
-        passwordSubmit.addEventListener('click', checkPassword);
-        passwordInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                checkPassword();
-            }
-        });
-
-        // Check if already authenticated in this session
-        if (sessionStorage.getItem('authenticated') === 'true') {
-            passwordOverlay.style.display = 'none';
-            mainContent.classList.remove('content-hidden');
-        }
     </script>
-    </div> <!-- Close main-content -->
 </body>
 </html>
