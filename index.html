@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skipr Lite: Self-Onboarding Pitch (Restructured)</title>
+    <style>
+        :root {
+            --accent: #4918B6;
+            --accent-light: #e9dcff;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --bg: #ffffff;
+            --success: #10b981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', 'Helvetica Neue', sans-serif;
+            color: var(--text-primary);
+            background: var(--bg);
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .slide {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .slide.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-content {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+        }
+
+        h3 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .tagline {
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            color: var(--text-secondary);
+            font-weight: 400;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            max-width: 65ch;
+        }
+
+        .label {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        /* Cover Slide */
+        #cover {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            text-align: center;
+        }
+
+        #cover h1 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Bullet Lists */
+        .bullet-list {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .bullet-list li {
+            font-size: 1.25rem;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-primary);
+        }
+
+        .bullet-list li:last-child {
+            border-bottom: none;
+        }
+
+        .bullet-list li::before {
+            content: "→";
+            color: var(--accent);
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+
+        .bullet-list.checkmarks li::before {
+            content: "✓";
+            color: var(--success);
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: #f5f5f5;
+            border-left: 4px solid var(--accent);
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .highlight-box p {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            max-width: 100%;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            background: var(--accent-light);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .stat-card h3 {
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card p {
+            color: var(--text-primary);
+            max-width: 100%;
+        }
+
+        /* Strategy Cards */
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* Two Column Layout */
+        .two-column-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 1.5rem;
+        }
+
+        .strategy-card {
+            padding: 2rem;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .strategy-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .strategy-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        /* Metrics */
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .metric-row:last-child {
+            border-bottom: none;
+        }
+
+        .metric-label {
+            font-size: 1.125rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        /* Phases */
+        .phase-timeline {
+            margin-top: 3rem;
+            position: relative;
+        }
+
+        .phase {
+            padding: 1.5rem 0 1.5rem 3rem;
+            position: relative;
+            border-left: 2px solid var(--border);
+        }
+
+        .phase::before {
+            content: "";
+            position: absolute;
+            left: -6px;
+            top: 2rem;
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .phase strong {
+            color: var(--accent);
+            font-size: 1.25rem;
+        }
+
+        /* Competition */
+        .competitor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .competitor-card {
+            padding: 2rem;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .competitor-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .competitor-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .competitor-logo {
+            height: 32px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        /* Skipr Logo */
+        .skipr-logo {
+            position: fixed;
+            top: 2rem;
+            right: 4rem;
+            height: 35px;
+            width: auto;
+            object-fit: contain;
+            opacity: 0.5;
+            z-index: 50;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .skipr-logo:hover {
+            opacity: 0.8;
+        }
+
+        /* Ordered Lists */
+        .ordered-list {
+            list-style: none;
+            counter-reset: item;
+            margin-top: 2rem;
+        }
+
+        .ordered-list li {
+            counter-increment: item;
+            padding: 1.5rem 0 1.5rem 4rem;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+            font-size: 1.125rem;
+            color: var(--text-primary);
+        }
+
+        .ordered-list li:last-child {
+            border-bottom: none;
+        }
+
+        .ordered-list li::before {
+            content: counter(item);
+            position: absolute;
+            left: 0;
+            top: 1.5rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        /* Closing */
+        #closing {
+            text-align: center;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+
+        #closing h2 {
+            color: var(--accent);
+            max-width: 900px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Navigation */
+        .nav-dots {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: var(--accent);
+            transform: scale(1.3);
+        }
+
+        .nav-dot:hover {
+            background: var(--accent);
+        }
+
+        /* Progress bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--accent);
+            width: 0%;
+            transition: width 0.3s ease;
+            z-index: 200;
+        }
+
+        /* Keyboard hint */
+        .keyboard-hint {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            opacity: 0.6;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .key {
+            padding: 0.25rem 0.5rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            background: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .slide {
+                padding: 3rem 1.5rem;
+            }
+
+            .nav-dots {
+                display: none;
+            }
+
+            .keyboard-hint {
+                display: none;
+            }
+
+            .skipr-logo {
+                top: 1.5rem;
+                right: 1.5rem;
+                height: 28px;
+            }
+
+            .ordered-list li {
+                padding-left: 3.5rem;
+            }
+
+            .strategy-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .two-column-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .slide {
+                page-break-after: always;
+                min-height: auto;
+            }
+
+            .nav-dots,
+            .progress-bar,
+            .keyboard-hint,
+            .skipr-logo {
+                display: none;
+            }
+        }
+
+        /* Password Protection */
+        #password-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        #password-box {
+            background: white;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        #password-box h2 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-size: 1.75rem;
+        }
+
+        #password-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        #password-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        #password-submit {
+            width: 100%;
+            padding: 1rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        #password-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(73, 24, 182, 0.3);
+        }
+
+        #password-error {
+            color: #ef4444;
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            display: none;
+        }
+
+        .content-hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="password-overlay">
+        <div id="password-box">
+            <h2>Protected Content</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Enter password to view presentation</p>
+            <input type="password" id="password-input" placeholder="Enter password" autofocus>
+            <button id="password-submit">Access Presentation</button>
+            <p id="password-error">Incorrect password. Please try again.</p>
+        </div>
+    </div>
+    <div id="main-content" class="content-hidden">
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Slide 1: Cover -->
+    <section class="slide" id="cover">
+        <div class="slide-content">
+            <h1>Self-onboarding</h1>
+        </div>
+    </section>
+
+    <!-- Slide 2: Market Opportunity & Momentum -->
+    <section class="slide" style="position: relative;">
+        <div class="slide-content">
+            <div class="label">Market Opportunity</div>
+            <h2>Legal mandate meets accelerating demand</h2>
+            <div class="stats-grid" style="margin-top: 2rem;">
+                <div class="stat-card">
+                    <h3>50-75K SMEs estimated</h3>
+                    <p><strong>90% without FMB:</strong> Only 1 in 10 eligible Belgian companies offer it today</p>
+                </div>
+                <div class="stat-card">
+                    <h3>7% → 16%</h3>
+                    <p><strong>Brussels adoption doubled</strong> (2024-2026) — employee demand is accelerating</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Jan 2027</h3>
+                    <p><strong>Legal deadline</strong> for 50+ employee companies — 6 months to act</p>
+                </div>
+            </div>
+            <div class="highlight-box" style="margin-top: 2rem;">
+                <p style="text-align: left;">→ Companies must offer FMB. Question is: whose platform?</p>
+            </div>
+        </div>
+        <p style="position: absolute; bottom: 4rem; left: 50%; transform: translateX(-50%); font-size: 0.875rem; font-style: italic; color: var(--text-secondary); margin: 0; text-align: center; width: 90%;">Sources: SD Worx/newmobility.news (adoption rates), BDO/EY/Monizze (legal mandate), Skipr analysis (market gap)</p>
+    </section>
+
+    <!-- Slide 4: Competitive Landscape -->
+    <section class="slide">
+        <div class="slide-content">
+            <div class="label">Competitive Landscape</div>
+            <h2>Our competitors and us</h2>
+
+            <div style="margin-top: 2rem;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 1rem;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid var(--accent);">
+                            <th style="text-align: left; padding: 1rem; color: var(--accent);">Competitor</th>
+                            <th style="text-align: left; padding: 1rem; color: var(--accent);">Self-Service</th>
+                            <th style="text-align: left; padding: 1rem; color: var(--accent);">AI Setup</th>
+                            <th style="text-align: left; padding: 1rem; color: var(--accent);">Pricing Model</th>
+                            <th style="text-align: left; padding: 1rem; color: var(--accent);">Target Segment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 1rem;"><strong>Mbrella</strong></td>
+                            <td style="padding: 1rem;">✓ Freemium</td>
+                            <td style="padding: 1rem;">❌</td>
+                            <td style="padding: 1rem;">Free tier + paid</td>
+                            <td style="padding: 1rem;">SME-first</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 1rem;"><strong>Olympus</strong></td>
+                            <td style="padding: 1rem;">✓ Lite version</td>
+                            <td style="padding: 1rem;">❌</td>
+                            <td style="padding: 1rem;">Tiered pricing</td>
+                            <td style="padding: 1rem;">Mid-market down</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 1rem;"><strong>Skipr</strong></td>
+                            <td style="padding: 1rem;">⏳ Q3 2026</td>
+                            <td style="padding: 1rem;"><strong>✓ Policy Agent</strong></td>
+                            <td style="padding: 1rem;">TBD</td>
+                            <td style="padding: 1rem;">SME via Pluxee</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 6: Vision -->
+    <section class="slide">
+        <div class="slide-content">
+            <div class="label">Our Vision</div>
+            <h2 style="font-size: 1.75rem; font-weight: 500; line-height: 1.5;">Enable any SME to launch compliant mobility programs in under 1 hour — zero CS calls, auto-generated mobility documents and first employee invited within 7 days.</h2>
+        </div>
+    </section>
+
+        <!-- Slide 5: Key complications -->
+    <section class="slide">
+        <div class="slide-content">
+            <div class="label">Key complications</div>
+            <h2>Why manual onboarding won't scale to meet the Jan 2027 deadline</h2>
+            <ul class="bullet-list" style="margin-top: 2rem;">
+                <li><strong>Only 1 in 4 admins arrive ready:</strong> 75% of Belgian SME owners lack awareness of FMB pillars, TCO calculation, and legal framework — they need guidance on every configuration decision despite templates being available.</li>
+                <li><strong>Current process doesn't scale:</strong> 2 hours manual CS per company × thousands of SMEs = operational collapse. Manual setup blocks the speed needed to capture market before Jan 2027.</li>
+                <li><strong>External advice creates compliance exposure:</strong> Companies depend on social secretaries (SD Worx, etc.) for TCO and legal advice, but quality is inconsistent and sometimes legally inaccurate — creating real compliance risk.</li>
+                <li><strong>Decision paralysis on configurations:</strong> Even with templates, admins don't know which mobility services to enable/disable (block SNCF? include bike apps in FMB?) or how payment accounts work — they ask for guidance at every step.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Slide 7: Product Strategy - NEW VERSION -->
+    <section class="slide">
+        <div class="slide-content">
+            <div class="label">Product Strategy</div>
+            <h2>Strategic Pillars: How We Win</h2>
+            <div class="strategy-grid">
+                <div class="strategy-card">
+                    <div class="strategy-number">1</div>
+                    <h3>Compliance-as-a-Moat</h3>
+                    <ul style="list-style: none; margin-top: 1rem;">
+                        <li style="margin-bottom: 0.5rem;">• Build the definitive Belgian FMB compliance engine (pillar rules, TCO, policy generation)</li>
+                        <li style="margin-bottom: 0.5rem;">• Create lock-in through auto-generated, company-branded policy documents</li>
+                        <li style="margin-bottom: 0.5rem; margin-top: 1rem; font-weight: 600; color: var(--accent);">Why: Cobee is feature-rich but not compliance-native — we own the legal complexity</li>
+                    </ul>
+                </div>
+                <div class="strategy-card">
+                    <div class="strategy-number">2</div>
+                    <h3>AI-Powered Setup Wizard</h3>
+                    <ul style="list-style: none; margin-top: 1rem;">
+                        <li style="margin-bottom: 0.5rem;">• Replace 2hr CS calls + social secretary dependency with intelligent extraction & validation</li>
+                        <li style="margin-bottom: 0.5rem;">• Smart defaults based on company size, industry, TCO data</li>
+                        <li style="margin-bottom: 0.5rem; margin-top: 1rem; font-weight: 600; color: var(--accent);">Why: Competitors rely on manual setup — we collapse time-to-value from 2 hours to &lt;1 hour</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 8: Product Strategy Part 2 - NEW VERSION -->
+    <section class="slide">
+        <div class="slide-content">
+            <div class="label">Product Strategy</div>
+            <h2>Strategic Pillars: How We Win (cont.)</h2>
+            <div class="strategy-grid">
+                <div class="strategy-card">
+                    <div class="strategy-number">3</div>
+                    <h3>Pluxee-Native Integration</h3>
+                    <ul style="list-style: none; margin-top: 1rem;">
+                        <li style="margin-bottom: 0.5rem;">• Exclusive access to Pluxee contract data, meal voucher integration, joint offering</li>
+                        <li style="margin-bottom: 0.5rem;">• Leverage Pluxee's SME sales motion (special contract links)</li>
+                        <li style="margin-bottom: 0.5rem; margin-top: 1rem; font-weight: 600; color: var(--accent);">Why: Third-party tools can't match our distribution + data access</li>
+                    </ul>
+                </div>
+                <div class="strategy-card" style="background: #ffebee; border: 2px solid #ef5350;">
+                    <h3 style="color: #c62828; margin-bottom: 1rem;">Not in scope</h3>
+                    <ul style="list-style: none; margin-top: 1rem;">
+                        <li style="margin-bottom: 0.75rem; color: var(--text-primary);">❌ Not building payroll integrations at launch</li>
+                        <li style="margin-bottom: 0.75rem; color: var(--text-primary);">❌ Not competing on feature breadth (enterprise SSO, advanced user mgmt)</li>
+                        <li style="margin-bottom: 0.75rem; color: var(--text-primary);">❌ Not targeting enterprise initially</li>
+                        <li style="margin-top: 1.5rem; font-weight: 600; color: var(--accent);">Resource Allocation: 60% AI/compliance | 30% UX | 10% Rollout</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 9: Product Strategy Part 1 - ORIGINAL (for comparison) -->
+    <section class="slide" style="background: #fafafa;">
+        <div class="slide-content">
+            <div class="label" style="color: var(--text-secondary);">Product Strategy — Original (for comparison)</div>
+            <h2>Four core pillars</h2>
+            <div class="strategy-grid">
+                <div class="strategy-card">
+                    <div class="strategy-number">1</div>
+                    <h3>Position as compliance solution</h3>
+                    <ul style="list-style: none; margin-top: 1rem;">
+                        <li style="margin-bottom: 0.5rem;">• Leverage program templates → "automate" best practices for mobility</li>
+                        <li style="margin-bottom: 0.5rem;">• Defer FMB computations and rely on <strong>external specialists</strong> (Shiftbox)</li>
+                        <li style="margin-bottom: 0.5rem;">• <strong>Strong basics</strong> - not an on-demand feature platform</li>
+                    </ul>
+                </div>
+                <div class="strategy-card">
+                    <div class="strategy-number">2</div>
+                    <h3>Simplicity-first UX</h3>
+                    <ul style="list-style: none; margin-top: 1rem;">
+                        <li style="margin-bottom: 0.5rem;">• Complete setup in one <strong>single session</strong></li>
+                        <li style="margin-bottom: 0.5rem;">• <strong>Smart defaults</strong> over customization - hand-holding</li>
+                        <li style="margin-bottom: 0.5rem;">• <strong>Smart import</strong> of company mobility docs to increase the completion pace (optional)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 10: Product Strategy Part 2 - ORIGINAL (for comparison) -->
+    <section class="slide" style="background: #fafafa;">
+        <div class="slide-content">
+            <div class="label" style="color: var(--text-secondary);">Product Strategy — Original (for comparison)</div>
+            <h2>Four core pillars</h2>
+            <div class="strategy-grid">
+                <div class="strategy-card">
+                    <div class="strategy-number">3</div>
+                    <h3>Policy Agent guides the setup</h3>
+                    <ul style="list-style: none; margin-top: 1rem;">
+                        <li style="margin-bottom: 0.5rem;">• <strong>AI extraction</strong> of information of mobility docs (if any)</li>
+                        <li style="margin-bottom: 0.5rem;">• <strong>Smart rules</strong> generation (based on best practices/mobility docs)</li>
+                        <li style="margin-bottom: 0.5rem;">• <strong>Admin approval/review</strong> at every step to ensure information validity</li>
+                    </ul>
+                </div>
+                <div class="strategy-card">
+                    <div class="strategy-number">4</div>
+                    <h3>Generate ready-to-use documents</h3>
+                    <ul style="list-style: none; margin-top: 1rem;">
+                        <li style="margin-bottom: 0.5rem;">• Auto-generated compliant policy docs (Agent Policy seeds)</li>
+                        <li style="margin-bottom: 0.5rem;">• Company-branded documentation ready to use to increase adoption and set context</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 11: Not in Scope -->
+    <section class="slide">
+        <div class="slide-content">
+            <div class="label">Boundaries</div>
+            <h2>What's not in scope (v1)</h2>
+            <ul class="bullet-list" style="margin-top: 2rem;">
+                <li>TCO computations</li>
+                <li>Advanced mobility services (bike leasing, parking subscriptions)</li>
+                <li>Full version features: no card, no IBAN</li>
+                <li>Deep HR integrations: payroll sync, HRIS connectors (SSO optional - TBD)</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Slide 12: Why We Win -->
+    <section class="slide">
+        <div class="slide-content">
+            <div class="label">Our Unique Position</div>
+            <h2>Why Skipr wins: Pluxee's distribution meets AI compliance</h2>
+            <p style="margin-top: 3rem; text-align: left; font-size: 1.4rem; line-height: 1.8;">
+                Pluxee is Belgium's leading employee benefits provider with decades of established SME relationships. It gives us direct access to a massive portfolio of companies who already trust Pluxee for benefits — and must add FMB by Jan 2027. <strong>Competitors can copy our AI features, but they cannot replicate Pluxee's strong market presence.</strong>
+            </p>
+        </div>
+    </section>
+
+    <!-- Slide 13: Success Metrics -->
+    <section class="slide">
+        <div class="slide-content">
+            <div class="label">Success Metrics</div>
+            <h2>Focus on getting companies to actually use the product</h2>
+            <div class="highlight-box" style="margin-top: 2rem;">
+                <p style="text-align: left;"><strong>&gt;70%</strong> of companies add ≥1 employee within 7 days</p>
+            </div>
+            <div style="margin-top: 3rem;">
+                <h3 style="color: var(--accent); margin-bottom: 1.5rem;">Secondary metrics:</h3>
+                <div class="metric-row">
+                    <div class="metric-label">Drop-off tracking</div>
+                    <div class="metric-value">Per step</div>
+                </div>
+                <div class="metric-row">
+                    <div class="metric-label">Iteration cycle</div>
+                    <div class="metric-value">Per cycle</div>
+                </div>
+                <div class="metric-row">
+                    <div class="metric-label">Time to first employee invited</div>
+                    <div class="metric-value">Track</div>
+                </div>
+                <div class="metric-row">
+                    <div class="metric-label">Zero-touch completion rate</div>
+                    <div class="metric-value">Monitor</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 14: Risks & Mitigation -->
+    <section class="slide">
+        <div class="slide-content">
+            <div class="label">Risk Management</div>
+            <h2>Key risks and mitigation strategy</h2>
+            <div style="margin-top: 2rem;">
+                <div class="metric-row" style="align-items: flex-start; padding: 2rem 0;">
+                    <div style="flex: 1;">
+                        <div style="font-size: 1.125rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">Policy Agent AI underperforms</div>
+                        <p style="font-size: 1rem; color: var(--text-secondary); margin: 0;">Inaccurate rule extraction damages trust</p>
+                    </div>
+                    <div style="flex: 1; padding-left: 2rem;">
+                        <div style="font-size: 0.875rem; font-weight: 600; color: var(--accent); margin-bottom: 0.5rem;">→ MITIGATION</div>
+                        <p style="font-size: 1rem; color: var(--text-primary); margin: 0;">Phase 1 controlled cohort (50 companies) with CS safety net; human review gate at every AI step</p>
+                    </div>
+                </div>
+                <div class="metric-row" style="align-items: flex-start; padding: 2rem 0;">
+                    <div style="flex: 1;">
+                        <div style="font-size: 1.125rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">Self-service adoption below 70%</div>
+                        <p style="font-size: 1rem; color: var(--text-secondary); margin: 0;">High CS costs persist, model doesn't scale</p>
+                    </div>
+                    <div style="flex: 1; padding-left: 2rem;">
+                        <div style="font-size: 0.875rem; font-weight: 600; color: var(--accent); margin-bottom: 0.5rem;">→ MITIGATION</div>
+                        <p style="font-size: 1rem; color: var(--text-primary); margin: 0;">Progressive rollout with drop-off tracking per step; iterate UX based on early cohort data</p>
+                    </div>
+                </div>
+                <div class="metric-row" style="align-items: flex-start; padding: 2rem 0;">
+                    <div style="flex: 1;">
+                        <div style="font-size: 1.125rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">Pluxee distribution doesn't convert</div>
+                        <p style="font-size: 1rem; color: var(--text-secondary); margin: 0;">Miss SME volume targets for Q3-Q4 2026</p>
+                    </div>
+                    <div style="flex: 1; padding-left: 2rem;">
+                        <div style="font-size: 0.875rem; font-weight: 600; color: var(--accent); margin-bottom: 0.5rem;">→ MITIGATION</div>
+                        <p style="font-size: 1rem; color: var(--text-primary); margin: 0;">Embed Pluxee early in solution design (Q2 2026); co-pilot first 50 signups via dedicated contract links</p>
+                    </div>
+                </div>
+                <div class="metric-row" style="align-items: flex-start; padding: 2rem 0; border-bottom: none;">
+                    <div style="flex: 1;">
+                        <div style="font-size: 1.125rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">Competitors launch first or better</div>
+                        <p style="font-size: 1rem; color: var(--text-secondary); margin: 0;">Mbrella/Olympus capture market before Q3 2026</p>
+                    </div>
+                    <div style="flex: 1; padding-left: 2rem;">
+                        <div style="font-size: 0.875rem; font-weight: 600; color: var(--accent); margin-bottom: 0.5rem;">→ MITIGATION</div>
+                        <p style="font-size: 1rem; color: var(--text-primary); margin: 0;">3-6 month first-mover window still open; AI differentiation vs manual self-service; leverage Pluxee sales reach</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 15: Go-to-Market -->
+    <section class="slide">
+        <div class="slide-content">
+            <div class="label">Go-to-Market</div>
+            <h2>Progressive rollout to manage risk</h2>
+
+            <div class="two-column-grid">
+                <div class="strategy-card">
+                    <h3 style="color: var(--accent); margin-bottom: 1rem;">Internal Readiness</h3>
+                    <ul class="bullet-list">
+                        <li>Ensure our infrastructure can handle large volumes</li>
+                        <li>Manage topic dependencies progresses (Policy Agent, Budget tab, Pro rata)</li>
+                        <li>Coordinate with Pluxee timelines: comm & GTM</li>
+                    </ul>
+                </div>
+
+                <div class="strategy-card">
+                    <h3 style="color: var(--accent); margin-bottom: 1rem;">External Rollout</h3>
+                    <div class="phase-timeline">
+                        <div class="phase">
+                            <p><strong>Phase 1:</strong> Controlled cohorts via special Pluxee contract links</p>
+                        </div>
+                        <div class="phase">
+                            <p><strong>Phase 2:</strong> Open to broader SME market (?)</p>
+                        </div>
+                        <div class="phase">
+                            <p><strong>Phase 3:</strong> Extensible patterns for Full version customers</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 16: Next Steps -->
+    <section class="slide">
+        <div class="slide-content">
+            <div class="label">Next Steps</div>
+            <h2>Action plan</h2>
+            <div style="margin-top: 2rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 0 1.5rem 4rem; position: relative; border-bottom: 1px solid var(--border);">
+                    <div style="position: absolute; left: 0; top: 1.5rem; width: 2.5rem; height: 2.5rem; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700;">1</div>
+                    <div style="font-size: 1.125rem; color: var(--text-primary); flex: 1;"><strong>Technical dependencies:</strong> Sync on Policy Agent, Budget improvements, Pro rata</div>
+                    <div style="font-size: 1.125rem; font-weight: 600; color: var(--accent); padding-left: 2rem;">ASAP</div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 0 1.5rem 4rem; position: relative; border-bottom: 1px solid var(--border);">
+                    <div style="position: absolute; left: 0; top: 1.5rem; width: 2.5rem; height: 2.5rem; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700;">2</div>
+                    <div style="font-size: 1.125rem; color: var(--text-primary); flex: 1;"><strong>Design sprints:</strong> Self-service flow prototypes for testing</div>
+                    <div style="font-size: 1.125rem; font-weight: 600; color: var(--accent); padding-left: 2rem;">May 2026</div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 0 1.5rem 4rem; position: relative; border-bottom: 1px solid var(--border);">
+                    <div style="position: absolute; left: 0; top: 1.5rem; width: 2.5rem; height: 2.5rem; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700;">3</div>
+                    <div style="font-size: 1.125rem; color: var(--text-primary); flex: 1;"><strong>Pluxee review:</strong> Include them early in the solution framing process</div>
+                    <div style="font-size: 1.125rem; font-weight: 600; color: var(--accent); padding-left: 2rem;">Q2 2026</div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 0 1.5rem 4rem; position: relative; border-bottom: 1px solid var(--border);">
+                    <div style="position: absolute; left: 0; top: 1.5rem; width: 2.5rem; height: 2.5rem; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700;">4</div>
+                    <div style="font-size: 1.125rem; color: var(--text-primary); flex: 1;"><strong>Progressive rollout plan:</strong> Define cohort criteria and rollout gates</div>
+                    <div style="font-size: 1.125rem; font-weight: 600; color: var(--accent); padding-left: 2rem;">Q3 2026</div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 0 1.5rem 4rem; position: relative;">
+                    <div style="position: absolute; left: 0; top: 1.5rem; width: 2.5rem; height: 2.5rem; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700;">5</div>
+                    <div style="font-size: 1.125rem; color: var(--text-primary); flex: 1;"><strong>Success metrics dashboard:</strong> Build activation tracking</div>
+                    <div style="font-size: 1.125rem; font-weight: 60; color: var(--accent); padding-left: 2rem;">Q3 2026</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 17: Questions -->
+    <section class="slide" id="closing">
+        <div class="slide-content">
+            <h2 style="font-size: clamp(3rem, 8vw, 6rem);">Questions?</h2>
+        </div>
+    </section>
+
+    <!-- Navigation Dots -->
+    <div class="nav-dots" id="navDots"></div>
+
+    <!-- Keyboard Hint -->
+    <div class="keyboard-hint">
+        <span><span class="key">↑</span> <span class="key">↓</span> Navigate</span>
+        <span><span class="key">Space</span> Next</span>
+    </div>
+
+    <!-- Skipr Logo -->
+    <img src="logo/2d886ad8871bb9142de5271beedf0c60af8ddeab.png" alt="Skipr" class="skipr-logo">
+
+    <script>
+        // Configuration
+        const slides = document.querySelectorAll('.slide');
+        const navDots = document.getElementById('navDots');
+        const progressBar = document.getElementById('progressBar');
+        let currentSlide = 0;
+        let isScrolling = false;
+
+        // Create navigation dots
+        slides.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.className = 'nav-dot';
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(index));
+            navDots.appendChild(dot);
+        });
+
+        const dots = document.querySelectorAll('.nav-dot');
+
+        // Update progress bar
+        function updateProgress() {
+            const progress = ((currentSlide + 1) / slides.length) * 100;
+            progressBar.style.width = progress + '%';
+        }
+
+        // Go to specific slide
+        function goToSlide(index) {
+            if (index < 0 || index >= slides.length || isScrolling) return;
+
+            isScrolling = true;
+            currentSlide = index;
+
+            // Smooth scroll to slide
+            slides[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            // Update active dot
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+
+            updateProgress();
+
+            setTimeout(() => {
+                isScrolling = false;
+            }, 1000);
+        }
+
+        // Next slide
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                goToSlide(currentSlide + 1);
+            }
+        }
+
+        // Previous slide
+        function prevSlide() {
+            if (currentSlide > 0) {
+                goToSlide(currentSlide - 1);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+
+                    // Update current slide based on which slide is in view
+                    const slideIndex = Array.from(slides).indexOf(entry.target);
+                    if (slideIndex !== -1 && !isScrolling) {
+                        currentSlide = slideIndex;
+                        dots.forEach((dot, i) => {
+                            dot.classList.toggle('active', i === slideIndex);
+                        });
+                        updateProgress();
+                    }
+                }
+            });
+        }, observerOptions);
+
+        slides.forEach(slide => observer.observe(slide));
+
+        // Touch events for mobile
+        let touchStartY = 0;
+        let touchEndY = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartY = e.changedTouches[0].screenY;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            if (touchStartY - touchEndY > swipeThreshold) {
+                nextSlide();
+            } else if (touchEndY - touchStartY > swipeThreshold) {
+                prevSlide();
+            }
+        }
+
+        // Mouse wheel navigation (optional)
+        let wheelTimeout;
+        document.addEventListener('wheel', (e) => {
+            clearTimeout(wheelTimeout);
+            wheelTimeout = setTimeout(() => {
+                if (e.deltaY > 0) {
+                    nextSlide();
+                } else if (e.deltaY < 0) {
+                    prevSlide();
+                }
+            }, 100);
+        }, { passive: true });
+
+        // Initialize
+        updateProgress();
+        slides[0].classList.add('visible');
+
+        // Password Protection
+        const PASSWORD = 'skipr2026';
+        const passwordInput = document.getElementById('password-input');
+        const passwordSubmit = document.getElementById('password-submit');
+        const passwordError = document.getElementById('password-error');
+        const passwordOverlay = document.getElementById('password-overlay');
+        const mainContent = document.getElementById('main-content');
+
+        function checkPassword() {
+            if (passwordInput.value === PASSWORD) {
+                passwordOverlay.style.display = 'none';
+                mainContent.classList.remove('content-hidden');
+                sessionStorage.setItem('authenticated', 'true');
+            } else {
+                passwordError.style.display = 'block';
+                passwordInput.value = '';
+                passwordInput.focus();
+            }
+        }
+
+        passwordSubmit.addEventListener('click', checkPassword);
+        passwordInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+
+        // Check if already authenticated in this session
+        if (sessionStorage.getItem('authenticated') === 'true') {
+            passwordOverlay.style.display = 'none';
+            mainContent.classList.remove('content-hidden');
+        }
+    </script>
+    </div> <!-- Close main-content -->
+</body>
+</html>
